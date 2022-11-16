@@ -2,6 +2,8 @@
 using DataAccess.Interface;
 using Entity.Domain;
 using Entity.DTO;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +33,30 @@ namespace DataAccess.Repository
             await ApiDbContext.Set<Employer>().AddAsync(employers);
             await ApiDbContext.SaveChangesAsync();
             return addEmployerRequest;
+        }
+        public async Task<UpdateEmployersDTO> UpdateByEmployerId(Guid Id)
+        {
+            var employers = await ApiDbContext.Set<Employer>().FirstOrDefaultAsync(x => x.Id == Id);
+
+            if(employers != null)
+            {
+                var ViewModel = new UpdateEmployersDTO()
+                {
+                    Id = employers.Id,
+                    Name = employers.Name,
+                    Email = employers.Email,
+                    Salary = employers.Salary,
+                    Department = employers.Department,
+                    DateOfBirth = employers.DateOfBirth,
+                };
+                return ViewModel;
+            }
+            return null;
+        }
+
+        public async Task<List<Employer>> GetEmployer()
+        {
+            return await ApiDbContext.Set<Employer>().ToListAsync();
         }
     }
 }

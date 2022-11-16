@@ -22,5 +22,15 @@ namespace Business.Service
         {
             return await employerRepository.AddEmployer(addEmployerRequest);
         }
+
+        public async Task<UpdateEmployersDTO> UpdateByEmployerId(Guid Id)
+        {
+            return await employerRepository.UpdateByEmployerId(Id);
+        }
+
+        public async Task<List<Employer>> GetEmployer()
+        {
+            return await employerRepository.GetEmployer();
+        }
     }
 }

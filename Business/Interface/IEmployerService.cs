@@ -11,5 +11,7 @@ namespace Business.Interface
     public interface IEmployerService
     {
         Task <AddEmployersDTO> AddEmployer(AddEmployersDTO addEmployerRequest);
+        Task<List<Employer>> GetEmployer();
+        Task<UpdateEmployersDTO> UpdateByEmployerId(Guid Id);
     }
 }

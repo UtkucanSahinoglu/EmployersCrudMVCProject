@@ -10,6 +10,8 @@ namespace DataAccess.Interface
 {
     public interface IEmployerRepository
     {
-        Task <AddEmployersDTO> AddEmployer(AddEmployersDTO addEmployerRequest);
+        Task<AddEmployersDTO> AddEmployer(AddEmployersDTO addEmployerRequest);
+        Task<List<Employer>> GetEmployer();
+        Task<UpdateEmployersDTO> UpdateByEmployerId(Guid Id);
     }
 }

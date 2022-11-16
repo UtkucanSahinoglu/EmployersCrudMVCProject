@@ -20,11 +20,25 @@ namespace EmployersMVCProject.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var employers = await employerService.GetEmployer();
+            return View(employers);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Add(AddEmployersDTO addEmployerRequest)
         {
             await employerService.AddEmployer(addEmployerRequest);
-            return RedirectToAction("Add");
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> View(Guid id)
+        {
+            var FindById = await employerService.UpdateByEmployerId(id);
+            return RedirectToAction("Index");
         }
     }
 }
