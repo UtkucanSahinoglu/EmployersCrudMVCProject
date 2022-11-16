@@ -1,4 +1,8 @@
+using Business.Interface;
+using Business.Service;
 using DataAccess.ApiDbContext;
+using DataAccess.Interface;
+using DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +12,9 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<EmployersDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("EmployerApiCoonnectionString")));
+
+builder.Services.AddScoped<IEmployerService, EmployerService>();
+builder.Services.AddScoped<IEmployerRepository, EmployerReposiyory>();
 
 var app = builder.Build();
 
